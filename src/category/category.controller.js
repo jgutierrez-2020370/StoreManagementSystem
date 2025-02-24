@@ -34,7 +34,8 @@ export const saveCategory = async(req, res)=>{
         return res.status(200).send(
             {
                 success: true,  
-                message: 'Category added succesfully'
+                message: 'Category added succesfully',
+                category
             }
         )
     } catch (err) {
@@ -53,7 +54,11 @@ export const getCategories = async(req, res)=>{
     try {
 
         const { limit = 20, skip = 0 } = req.query
-        const categories = await Category.find()
+        const categories = await Category.find(
+            {
+                name: { $ne: 'default' }
+            }
+        )
             .skip(skip)
             .limit(limit)
 
@@ -86,7 +91,7 @@ export const getCategories = async(req, res)=>{
 }
 
 export const deleteCategory = async (req, res) => {
-    const { id } = req.body
+    const { id } = req.params
 
     try {
         const category = await Category.findById(id)
