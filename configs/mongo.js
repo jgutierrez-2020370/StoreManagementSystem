@@ -2,6 +2,7 @@
 
 import mongoose from "mongoose"
 import { defaultCategory } from "../src/category/category.controller.js"
+import { defaultAdmin } from "../src/user/user.admin.controller.js"
 
 export const connect = async()=> {
     try {
@@ -33,6 +34,7 @@ export const connect = async()=> {
         )
 
         defaultCategory()
+        defaultAdmin()
         
     } catch (err) {
         console.log('Database connection failed' , err)
