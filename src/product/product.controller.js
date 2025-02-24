@@ -7,10 +7,11 @@ export const saveProduct = async (req, res) => {
     try {
 
         if (!category) {
-            category = "default";
+            const defaultCategory = await Category.findOne({ name: 'default' })
+            category = defaultCategory._id
         }
 
-        const categoryData = await Category.findOne({ name: category })
+        const categoryData = await Category.findById( category )
 
         if (!categoryData) {
             return res.status(400).send(
@@ -149,7 +150,7 @@ export const updateProduct = async (req, res) => {
         }
 
         if (category) {
-            const categoryData = await Category.findOne({ name: category })
+            const categoryData = await Category.findById( category )
             
 
             if (!categoryData) {
