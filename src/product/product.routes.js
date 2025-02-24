@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { isAdmin, validateJwt } from "../../middlewares/validate.jwt.js";
 import { deleteProduct, get, getOneProduct, outOfStockProduct, saveProduct, updateProduct } from "./product.controller.js";
-import { createProductValidate, deleteValidator, updateProductValidate } from "../../middlewares/validators.js";
+import { createProductValidate, updateProductValidate } from "../../middlewares/validators.js";
 
 const api = Router()
 
@@ -14,14 +14,6 @@ api.get(
         isAdmin
     ],
     outOfStockProduct
-)
-
-api.get(
-    '/:id',
-    [
-        validateJwt
-    ],
-    getOneProduct
 )
 
 api.get(
@@ -44,6 +36,23 @@ api.post(
     saveProduct
 )
 
+api.delete(
+    '/',
+    [
+        validateJwt,
+        isAdmin,
+    ],
+    deleteProduct
+)
+
+api.get(
+    '/:id',
+    [
+        validateJwt
+    ],
+    getOneProduct
+)
+
 api.put(
     '/:id',
     [
@@ -53,16 +62,5 @@ api.put(
     ],
     updateProduct
 )
-
-api.delete(
-    '/',
-    [
-        validateJwt,
-        isAdmin,
-        deleteValidator
-    ],
-    deleteProduct
-)
-
 
 export default api
