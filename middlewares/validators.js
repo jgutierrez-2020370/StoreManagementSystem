@@ -41,10 +41,6 @@ export const categoryValidator = [
     validateErrors
 ]
 
-export const deleteValidator = [
-    body('id', 'Id cannot be empty').notEmpty(),
-    validateErrors
-]
 
 export const updateCategoryValidate = [
     body('name').optional(),
