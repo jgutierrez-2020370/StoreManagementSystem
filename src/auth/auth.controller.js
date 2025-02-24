@@ -1,6 +1,30 @@
 import User from '../user/user.model.js'
-import { checkPassword } from '../../utils/encrypt.js'
+import { checkPassword, encrypt } from '../../utils/encrypt.js'
 import { generatejwt } from '../../utils/jwt.js'
+
+export const registerUser = async(req, res) => {
+    try {
+        let data = req.body
+        let user = new User(data)
+        user.password = await encrypt(user.password)
+        user.role = 'CLIENT'
+        await user.save()
+        return res.send(
+            {
+                success: true,
+                message: `registration successful, can be logged with ${user.username} or ${user.email}`
+            }
+        )
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send(
+            {
+                success: false,
+                message: 'General error with register user'
+            }
+        )
+    }
+}
 
 export const login = async (req, res) => {
     try {

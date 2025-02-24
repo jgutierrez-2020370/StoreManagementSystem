@@ -1,9 +1,15 @@
 import { Router } from "express";
-import { loginValidator } from "../../middlewares/validators.js";
-import { login } from "./auth.controller.js";
+import { loginValidator, registerValidator } from "../../middlewares/validators.js";
+import { login, registerUser } from "./auth.controller.js";
 
 
 const api = Router()
+
+api.post(
+    '/Register',
+    [registerValidator],
+    registerUser
+)
 
 api.post(
     '/Login',
