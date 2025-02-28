@@ -1,37 +1,30 @@
 import User from '../user/user.model.js'
-import { checkPassword, encrypt } from '../../utils/encrypt.js'
-import jwt from 'jsonwebtoken'
-
-export const registerUser = async(req, res) => {
-    try {
-        let data = req.body
-        let user = new User(data)
-        user.password = await encrypt(user.password)
-        user.role = 'CLIENT'
-        await user.save()
-        return res.send(
-            {
-                success: true,
-                message: `User registred succesfully, can be logged with username: ${user.username}`
-            }
-        )
-    } catch (err) {
-        console.error(err)
-        return res.status(500).send(
-            {
-                success: false,
-                message: 'General error with register user'
-            }
-        )
-    }
-}
+import { checkPassword } from '../../utils/encrypt.js'
 
 export const deleteAccount = async (req, res) => {
-    const { password } = req.body
+    const { password } = req.params
     try {
         const user = await User.findById(req.user.uid)
         const pass = await checkPassword(user.password, password)
-        
+
+        if(user.status === false) {
+            return res.status(404).send(
+                {
+                    success: false,
+                    message: 'User not found'
+                }
+            )
+        }
+
+        if(user.role == "ADMIN") {
+            return res.status(401).send(
+                {
+                    success: false,
+                    message: 'Admins cannot be deleted'
+                }
+            )
+        }
+
         if (!pass) {
             return res.status(401).send(
                 {
@@ -41,7 +34,11 @@ export const deleteAccount = async (req, res) => {
             )
         }
 
-        await User.findByIdAndUpdate(user, { status: false }, { new: true })
+        await User.findByIdAndUpdate(
+            user, 
+            { status: false }, 
+            { new: true }
+        )
 
         return res.send(
             {
@@ -62,11 +59,30 @@ export const deleteAccount = async (req, res) => {
 }
 
 export const updateProfile = async (req, res)=> {
-    const { password, ...data } = req.body
+    const { password } = req.params
+    const { ...data } = req.body
     try {
         const user = await User.findById(req.user.uid)
         const pass = await checkPassword(user.password, password)
-        
+
+        if(user.status === false) {
+            return res.status(404).send(
+                {
+                    success: false,
+                    message: 'User not found'
+                }
+            )
+        }
+
+        if(user.role == "ADMIN") {
+            return res.status(401).send(
+                {
+                    success: false,
+                    message: 'Admins cannot be udated'
+                }
+            )
+        }
+
         if (!pass) {
             return res.status(401).send(
                 {
