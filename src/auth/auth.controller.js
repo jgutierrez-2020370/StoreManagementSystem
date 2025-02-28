@@ -1,15 +1,28 @@
 import User from '../user/user.model.js'
 import { checkPassword, encrypt } from '../../utils/encrypt.js'
 import { generatejwt } from '../../utils/jwt.js'
+import Cart from '../shoppingCart/shoppingCart.model.js'
 
 export const registerUser = async(req, res) => {
     try {
         let data = req.body
-        let user = new User(data)
+        const carrito = new Cart(
+            {
+                items: [],
+                total: 0,
+            }
+        )
+        await carrito.save()
+        let user = new User(
+            {
+                ...data, 
+                cart: carrito._id
+            }
+        )
         user.password = await encrypt(user.password)
         user.role = 'CLIENT'
         await user.save()
-        return res.send(
+        return res.status(200).send(
             {
                 success: true,
                 message: `registration successful, can be logged with ${user.username} or ${user.email}`
@@ -53,7 +66,7 @@ export const login = async (req, res) => {
                 role: user.role
             }
             let token = await generatejwt(loggedUser) 
-            return res.send(
+            return res.status(200).send(
                 {
                     success: true,
                     message: `Welcome ${user.name}`,
