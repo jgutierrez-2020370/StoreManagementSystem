@@ -6,6 +6,15 @@ export const validateJwt = async(req, res, next) => {
         let { authorization } = req.headers
 
         if (!authorization) return res.status(401).send({message: 'Unauthorizated'})
+
+        if(authorization.status == 'false') {
+            return res.status(404).send(
+                {
+                    succes: false,
+                    message: 'user not found'
+                }
+            )
+        }
         let user = jwt.verify(authorization, secretKey)
         req.user = user
         next()
