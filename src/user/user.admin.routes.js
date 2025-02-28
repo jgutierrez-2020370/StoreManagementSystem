@@ -1,16 +1,17 @@
 import { Router } from "express";
-import { registerAdmin } from "./user.admin.controller.js";
-import { registerValidator } from "../../middlewares/validators.js";
+import { isAdmin, validateJwt } from "../../middlewares/validate.jwt.js";
+import { changeRole } from "./user.admin.controller.js";
 
 const api = Router()
 
 //Ruta Públicas
-
-api.post(
-    '/Register',
-    [registerValidator],
-    registerAdmin
+api.put(
+    '/changeRol/:id',
+    [
+        validateJwt,
+        isAdmin,
+    ],
+    changeRole
 )
-
 
 export default api
