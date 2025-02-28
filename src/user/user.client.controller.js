@@ -5,6 +5,7 @@ export const deleteAccount = async (req, res) => {
     const { password } = req.params
     try {
         const user = await User.findById(req.user.uid)
+       
         const pass = await checkPassword(user.password, password)
 
         if(user.status === false) {
@@ -96,7 +97,7 @@ export const updateProfile = async (req, res)=> {
             user,
             data,
             { new: true }
-        )
+        ).populate('cart', 'items total')
 
         return res.send(
             {
