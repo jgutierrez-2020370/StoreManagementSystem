@@ -4,7 +4,7 @@ import Product from '../product/product.model.js'
 
 export const updateCart = async (req, res) => {
     try {
-        const { product, quantity } = req.body
+        let { product, quantity } = req.body
 
         const user = await User.findById(req.user.uid)
         const cart = await Cart.findById(user.cart)
@@ -38,23 +38,50 @@ export const updateCart = async (req, res) => {
             )
         }
 
-        cart.items.push(
-            {
-                product,
-                quantity,
-                price: productFind.price*quantity
+        const alreadyExist = cart.items.find(item => item.product.toString() === product.toString())
+        
+        if (alreadyExist) {
+            if ((Number(alreadyExist.quantity) + Number(quantity)) > productFind.stock){
+                return res.status(400).send(
+                    {
+                        success: false,
+                        message: 'Stock is not enough'
+                    }
+                )
+            } else {
+                alreadyExist.quantity = Number(alreadyExist.quantity) + Number(quantity)
+                alreadyExist.price = productFind.price * alreadyExist.quantity
             }
-        )
+        } else {
+            cart.items.push(
+                {
+                    product,
+                    quantity,
+                    price: productFind.price * quantity
+                }
+            )
+        }
 
         cart.total = cart.items.reduce((sum, item) => sum + item.price, 0)
 
         await cart.save()
 
+        const cartPopulate = await Cart.findById(cart._id).populate(
+            {
+                path: 'items.product',
+                select: 'name price description stock',
+                populate: {
+                    path: 'category',
+                    select: 'name -_id'
+                }
+            }
+        )
+
         return res.status(200).send(
             {
                 success: true,
                 message: 'Cart updated successfully',
-                cart
+                cartPopulate
             }
         )
         
@@ -72,9 +99,17 @@ export const updateCart = async (req, res) => {
 export const getMyCart = async (req, res) => {
     try {
         const user = await User.findById(req.user.uid)
-        console.log(user);
         
-        const cart = await Cart.findById(user.cart)
+        const cart = await Cart.findById(user.cart).populate(
+            {
+                path: 'items.product',
+                select: 'name price description stock',
+                populate: {
+                    path: 'category',
+                    select: 'name -_id'
+                }
+            }
+        )
 
         if(!cart){
             res.status(404).send(
