@@ -23,6 +23,27 @@ export const registerValidator = [
     validateErrors
 ]
 
+export const updateAccountValidator = [
+    body('name', 'Name cannot be empty')
+        .optional(),
+    body('surname', 'Surname cannot be empty')
+        .optional(),
+    body('username', 'Username cannot be empty')
+        .optional()
+        .toLowerCase()
+        .custom(existUsername),
+    body('email', 'Email cannot be empty or is not a valid email')
+        .optional()
+        .isEmail()
+        .custom(existEmail),
+    body('password', 'Password cannot be empty')
+        .optional()
+        .isStrongPassword()
+        .withMessage('The password must be strong')
+        .isLength({min: 8}),
+    validateErrors
+]
+
 export const loginValidator = [
     body('userLoggin', 'Username or email cannot be empty')
         .notEmpty()
