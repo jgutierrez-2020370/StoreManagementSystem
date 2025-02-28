@@ -37,6 +37,11 @@ const userSchema = Schema(
             uppercase: true,
             enum: ['ADMIN', 'CLIENT']
         },
+        cart: {
+            type: Schema.Types.ObjectId,
+            ref: 'Cart',
+            required: [true, 'missing cart']
+        },
         status: {
             type: Boolean,
             default: true
@@ -44,7 +49,7 @@ const userSchema = Schema(
     },
     {
         versionKey: false, 
-        timeStamps: true
+        timestamps: true
     }
 )
 
