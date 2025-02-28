@@ -22,10 +22,13 @@ export const registerUser = async(req, res) => {
         user.password = await encrypt(user.password)
         user.role = 'CLIENT'
         await user.save()
+
+        const userPopulate = await user.populate('cart', 'items total')
         return res.status(200).send(
             {
                 success: true,
-                message: `registration successful, can be logged with ${user.username} or ${user.email}`
+                message: `registration successful, can be logged with ${user.username} or ${user.email}`,
+                user
             }
         )
     } catch (err) {
