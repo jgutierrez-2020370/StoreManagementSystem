@@ -11,6 +11,18 @@
 			"item": [
 				{
 					"name": "createCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -31,6 +43,94 @@
 								{
 									"key": "description",
 									"value": "Articulos para el higiene",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Category/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCategory 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Electronica",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Tecnología",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Category/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCategory 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Congelados",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Alimentos congelados",
 									"type": "text"
 								}
 							]
@@ -96,16 +196,10 @@
 						],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "id",
-									"value": "67af7b7a343353e338fb933a",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Category/",
+							"raw": "localhost:3200/v1/Category/67c500a123a82cdd05576646",
 							"host": [
 								"localhost"
 							],
@@ -113,7 +207,7 @@
 							"path": [
 								"v1",
 								"Category",
-								""
+								"67c500a123a82cdd05576646"
 							]
 						}
 					},
@@ -146,7 +240,7 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Category/67af7b7a343353e338fb933a",
+							"raw": "localhost:3200/v1/Category/67c5009b23a82cdd05576640",
 							"host": [
 								"localhost"
 							],
@@ -154,7 +248,7 @@
 							"path": [
 								"v1",
 								"Category",
-								"67af7b7a343353e338fb933a"
+								"67c5009b23a82cdd05576640"
 							]
 						}
 					},
@@ -191,17 +285,186 @@
 								},
 								{
 									"key": "price",
-									"value": "200",
+									"value": "40",
 									"type": "text"
 								},
 								{
 									"key": "category",
-									"value": "Higiene",
+									"value": "67c5009b23a82cdd05576640",
 									"type": "text"
 								},
 								{
 									"key": "stock",
-									"value": "2",
+									"value": "50",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Product/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProduct 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pantalla RCA LED Smart HD RC40RK - 40 pulgadas",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Ofrece una resolución de 1920720 píxeles, lo que garantiza imágenes nítidas y detalladas",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1595.00",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67c5009e23a82cdd05576643",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "15",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Product/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProduct 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pechuguitas Crispy Pollo Rey 400g",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "¡Son todas tuyas!Las Pechuguitas Crispy salvarán tu día. Unos pocos minutos y la comida estará lista ¡Pruébalas! Pollo Rey, confianza desde su origen.",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "29.50",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67c500ba23a82cdd0557664e",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "40",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Product/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProduct 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Calcetin Deportivo Duralonn",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Calcetin Deportivo Duralon Caballero 6P",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "33.00",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "stock",
+									"value": "19",
 									"type": "text"
 								}
 							]
@@ -237,7 +500,7 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Limpia vidr",
+									"value": "Calcetin Deportivo Duralonn",
 									"type": "text"
 								},
 								{
@@ -253,21 +516,21 @@
 									"disabled": true
 								},
 								{
-									"key": "category",
-									"value": "Higiene",
+									"key": "stock",
+									"value": "40",
 									"type": "text",
 									"disabled": true
 								},
 								{
-									"key": "stock",
-									"value": "2",
+									"key": "category",
+									"value": "67c3233931d54c60d12a83fe",
 									"type": "text",
 									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Product/67af7bf9343353e338fb9344",
+							"raw": "localhost:3200/v1/Product/67c500ec23a82cdd05576657",
 							"host": [
 								"localhost"
 							],
@@ -275,7 +538,7 @@
 							"path": [
 								"v1",
 								"Product",
-								"67af7bf9343353e338fb9344"
+								"67c500ec23a82cdd05576657"
 							]
 						}
 					},
@@ -294,16 +557,10 @@
 						],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "id",
-									"value": "67af7bf9343353e338fb9344",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Product/",
+							"raw": "localhost:3200/v1/Product/67c5010123a82cdd0557666a",
 							"host": [
 								"localhost"
 							],
@@ -311,7 +568,7 @@
 							"path": [
 								"v1",
 								"Product",
-								""
+								"67c5010123a82cdd0557666a"
 							]
 						}
 					},
@@ -351,6 +608,39 @@
 					"response": []
 				},
 				{
+					"name": "popularProducts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Product/Popular",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Product",
+								"Popular"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getOutOfStockProducts",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -369,7 +659,7 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Product//OutOfStock",
+							"raw": "localhost:3200/v1/Product/OutOfStock",
 							"host": [
 								"localhost"
 							],
@@ -377,7 +667,6 @@
 							"path": [
 								"v1",
 								"Product",
-								"",
 								"OutOfStock"
 							]
 						}
@@ -385,7 +674,40 @@
 					"response": []
 				},
 				{
-					"name": "getOneProduct",
+					"name": "getByCategory",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Product/67c5007323a82cdd05576638",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Product",
+								"67c5007323a82cdd05576638"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByName",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -403,23 +725,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "",
-									"type": "text"
-								},
-								{
-									"key": "price",
-									"value": "",
+									"value": "Pechuguitas Crispy Pollo Rey 400g",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Product/67af7bf9343353e338fb9344",
+							"raw": "localhost:3200/v1/Product/getByName",
 							"host": [
 								"localhost"
 							],
@@ -427,7 +739,7 @@
 							"path": [
 								"v1",
 								"Product",
-								"67af7bf9343353e338fb9344"
+								"getByName"
 							]
 						}
 					},
@@ -439,42 +751,18 @@
 			"name": "ADMIN",
 			"item": [
 				{
-					"name": "registerAdmin",
+					"name": "ChangeRol",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "name",
-									"value": "Admin",
-									"type": "text"
-								},
-								{
-									"key": "surname",
-									"value": "Admin",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "Admin",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "Admin12345@kinal.edu.gt",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "Password123.",
-									"type": "text"
-								}
-							]
-						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3200/v1/Admin/Register",
+							"raw": "localhost:3200/v1/Admin/changeRol/67c5019e23a82cdd0557668e",
 							"host": [
 								"localhost"
 							],
@@ -482,7 +770,70 @@
 							"path": [
 								"v1",
 								"Admin",
-								"Register"
+								"changeRol",
+								"67c5019e23a82cdd0557668e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jonathan",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Admin/67c5019e23a82cdd0557668e",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Admin",
+								"67c5019e23a82cdd0557668e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3200/v1/Admin/67c5019e23a82cdd0557668e",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Admin",
+								"67c5019e23a82cdd0557668e"
 							]
 						}
 					},
@@ -529,14 +880,12 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Client/Register",
+							"raw": "localhost:3200/Register",
 							"host": [
 								"localhost"
 							],
 							"port": "3200",
 							"path": [
-								"v1",
-								"Client",
 								"Register"
 							]
 						}
@@ -556,16 +905,10 @@
 						],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "password",
-									"value": "Password123.",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Client/",
+							"raw": "localhost:3200/v1/Client/Password123.",
 							"host": [
 								"localhost"
 							],
@@ -573,14 +916,14 @@
 							"path": [
 								"v1",
 								"Client",
-								""
+								"Password123."
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "deleteAccount Copy",
+					"name": "UpadateClient",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -594,19 +937,14 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "password",
-									"value": "Password123.",
-									"type": "text"
-								},
-								{
 									"key": "name",
-									"value": "SI",
+									"value": "Jonathann",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "localhost:3200/v1/Client/",
+							"raw": "localhost:3200/v1/Client/Password123.",
 							"host": [
 								"localhost"
 							],
@@ -614,6 +952,172 @@
 							"path": [
 								"v1",
 								"Client",
+								"Password123."
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ShoppingCart",
+			"item": [
+				{
+					"name": "AddProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product",
+									"value": "67c3f4a13aa07515892ce62c",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Cart/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProductFromTheCart",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Cart/67c500ec23a82cdd05576657",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Cart",
+								"67c500ec23a82cdd05576657"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMyCart",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3200/v1/Cart/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Cart",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FACTURE",
+			"item": [
+				{
+					"name": "CreateFacture",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3200/v1/Facture/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Facture",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMyFactures",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3200/v1/Facture/",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Facture",
 								""
 							]
 						}
@@ -645,12 +1149,12 @@
 					"urlencoded": [
 						{
 							"key": "userLoggin",
-							"value": "Admin",
+							"value": "admin",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "Password123.",
+							"value": "@Admin123@",
 							"type": "text"
 						}
 					]
