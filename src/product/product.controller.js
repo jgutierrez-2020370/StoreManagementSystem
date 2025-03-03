@@ -35,7 +35,6 @@ export const saveProduct = async (req, res) => {
                 description,
                 price,
                 stock,
-                status: 'STOCK',
                 category: [categoryData.id]
             }
         )
@@ -65,9 +64,9 @@ export const saveProduct = async (req, res) => {
 }
 
 export const getOneProduct = async(req,res) =>{
-    const { id } = req.params
+    const { name } = req.body
     try {
-        const product = await Product.findById(id).populate("category", "name")
+        const product = await Product.findOne({name: name}).populate("category", "name")
 
         if(!product) return res.status(404).send(
             {
@@ -100,7 +99,7 @@ export const get = async(req, res)=>{
     try {
 
         const { limit = 20, skip = 0 } = req.query
-        const products = await Product.find({ status: { $ne: 'OUTOFSTOCK' } })
+        const products = await Product.find({ stock: { $ne: 0 } })
             .populate("category", "name")
             .skip(skip)
             .limit(limit)
@@ -192,7 +191,7 @@ export const updateProduct = async (req, res) => {
 }
 
 export const deleteProduct = async(req,res)=>{
-    const { id } = req.body
+    const { id } = req.params
     try {
             const product = await Product.findById(id)
             if (!product) {
@@ -227,7 +226,7 @@ export const deleteProduct = async(req,res)=>{
 export const outOfStockProduct = async(req, res)=>{
     try {        
         const { limit = 20, skip = 0 } = req.query
-        const products = await Product.find({ status: 'OUTOFSTOCK'})
+        const products = await Product.find({ stock: 0})
             .populate("category", "name")
             .skip(skip)
             .limit(limit)
@@ -253,6 +252,79 @@ export const outOfStockProduct = async(req, res)=>{
             {
                 success: false,
                 message: 'General error when getting out stock products',
+                err
+            }
+        )
+    }
+}
+
+export const TopSellingProducts = async (req, res) =>{
+    try {
+        const limit = 3
+        const topSP = await Product.find().sort({purchaseCount: -1}).limit(limit)
+
+         return res.status(200).send(
+            {
+                success: true,
+                message: 'most popular products',
+                topSP
+            }
+         )
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send(
+            {
+                success: false,
+                message: 'General error when top selling products',
+                err
+            }
+        )
+    }
+}
+
+export const getByCategory = async (req, res) => {
+    try {
+        const { id }= req.params
+
+        const category = await Category.findById(id)
+
+        if(!category){
+            return res.status(404).send(
+                {
+                    success: false,
+                    message: 'Category not found'
+                }
+            )
+        }
+
+        const products = await Product.find({category: category._id}).populate({
+            path: 'category',
+            select: 'name', 
+            model: 'Category'
+          })
+
+        if (!products){
+            return res.status(404).send(
+                {
+                    success: false,
+                    message: 'Product not found'
+                }
+            )
+        }
+
+        return res.status(200).send(
+            {
+                success: true,
+                message: 'Products',
+                products
+            }
+        )
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send(
+            {
+                success: false,
+                message: 'General error when getting by category',
                 err
             }
         )

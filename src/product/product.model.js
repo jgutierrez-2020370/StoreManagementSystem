@@ -5,12 +5,12 @@ const productSchema = Schema(
         name: {
             type: String,
             required: [true, 'Name is required'],
-            maxLength: [25, "Name can't exceed 25 characters"]
+            maxLength: [75, "Name can't exceed 75 characters"]
         },
         description: {
             type: String,
             required: [true, 'description'],
-            maxLength: [50, "Breed can't exceed 50 characters"]
+            maxLength: [200, "Breed can't exceed 200 characters"]
         },
         price: {
             type: Number,
@@ -25,11 +25,9 @@ const productSchema = Schema(
             type: Number,
             required: [true, 'Stock is required']
         },
-        status: {
-            type: String,
-            required: [true, 'status is required'],
-            uppercase: true,
-            enum: ['STOCK', 'OUTOFSTOCK']
+        purchaseCount: {
+            type: Number,
+            default: 0
         }
     },
     {
