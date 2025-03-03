@@ -40,6 +40,11 @@ const factureSchema = Schema(
             type: Number,
             required: [true, 'Subtotal is required'],
             default: 0
+        },
+        status: {
+            type: String,
+            enum: ['ACTIVE', 'ANNULED'],
+            default: 'ACTIVE'
         }
     },
     {
