@@ -144,7 +144,53 @@ export const getMyFactures = async (req, res) => {
         return res.status(500).send(
             {
                 success: false,
-                message: 'General error when getting facture'
+                message: 'General error when getting factures'
+            }
+        )
+    }
+}
+
+export const getFactures = async (req, res) => {
+    try {
+        const { limit = 20, skip = 0 } = req.query
+        const factures = await Facture.find().populate(
+            {
+                path: 'items.product', 
+                model: 'Product'
+            }
+        ).populate(
+            {
+                path: 'user',
+                select: 'name email',
+                model: 'User'
+            }
+        ).skip(skip)
+        .limit(limit)
+
+        if(!factures) {
+            return res.status(404).send(
+                {
+                    success: true,
+                    message: 'There are no factures'
+                }
+            )
+        }
+        
+
+        return res.status(200).send(
+            {
+                success: true,
+                message: 'Factures',
+                factures
+            }
+        )
+        
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send(
+            {
+                success: false,
+                message: 'General error when getting factures'
             }
         )
     }
