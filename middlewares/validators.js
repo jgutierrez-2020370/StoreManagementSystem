@@ -41,6 +41,7 @@ export const updateAccountValidator = [
         .isStrongPassword()
         .withMessage('The password must be strong')
         .isLength({min: 8}),
+    body('status',  'status can not be updated').not(),
     validateErrors
 ]
 
@@ -65,13 +66,13 @@ export const categoryValidator = [
 
 export const updateCategoryValidate = [
     body('name').optional(),
-    body('description').optional().isLength({max: 100}),
+    body('description', 'description too long').optional().isLength({max: 100}),
     validateErrors
 ]
 
 export const updateProductValidate =  [
-    body('name').optional().isLength({max: 25}),
-    body('description').optional().isLength({max:50}),
+    body('name', 'name is too long').optional().isLength({max: 75}),
+    body('description', 'description too long').optional().isLength({max:200}),
     body('price').optional(),
     body('category').optional(),
     body('stock').optional(),
@@ -79,10 +80,37 @@ export const updateProductValidate =  [
 ]
 
 export const createProductValidate = [
-    body('name').notEmpty().isLength({max: 25}).custom(existProduct),
-    body('description').notEmpty().isLength({max:50}),
-    body('price').notEmpty(),
+    body('name', 'name cannot be empty or is too long').notEmpty().isLength({max: 75}).custom(existProduct),
+    body('description', 'description cannot be empty or is too long').notEmpty().isLength({max:200}),
+    body('price', 'price cannot be empty').notEmpty(),
     body('category').optional(),
-    body('stock').notEmpty(),
+    body('stock', 'stock cannot be empty').notEmpty(),
+    validateErrors
+]
+
+export const addCartValidator = [
+    body('product', 'product cannot be empty').notEmpty(),
+    body('quantity', 'quantity is required').notEmpty(),
+    validateErrors
+]
+
+export const updateAccountValidatorAdmin = [
+    body('name', 'Name cannot be empty')
+        .optional(),
+    body('surname', 'Surname cannot be empty')
+        .optional(),
+    body('username', 'Username cannot be empty')
+        .optional()
+        .toLowerCase()
+        .custom(existUsername),
+    body('email', 'Email cannot be empty or is not a valid email')
+        .optional()
+        .isEmail()
+        .custom(existEmail),
+    body('password', 'Password can not be updated')
+        .not()
+        .isStrongPassword()
+        .withMessage('The password must be strong')
+        .isLength({min: 8}),
     validateErrors
 ]
