@@ -79,7 +79,7 @@ export const updateProfile = async (req, res)=> {
             return res.status(401).send(
                 {
                     success: false,
-                    message: 'Admins cannot be udated'
+                    message: 'Admins cannot be updated'
                 }
             )
         }
