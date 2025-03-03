@@ -41,7 +41,6 @@ export const updateAccountValidator = [
         .isStrongPassword()
         .withMessage('The password must be strong')
         .isLength({min: 8}),
-    body('status',  'status can not be updated').not(),
     validateErrors
 ]
 
