@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { isAdmin, validateJwt } from "../../middlewares/validate.jwt.js";
-import { deleteProduct, get, getOneProduct, outOfStockProduct, saveProduct, updateProduct } from "./product.controller.js";
+import { deleteProduct, get, getByCategory, getOneProduct, outOfStockProduct, saveProduct, TopSellingProducts, updateProduct } from "./product.controller.js";
 import { createProductValidate, updateProductValidate } from "../../middlewares/validators.js";
 
 const api = Router()
@@ -24,6 +24,14 @@ api.get(
     get
 )
 
+api.get(
+    '/Popular',
+    [
+        validateJwt
+    ],
+    TopSellingProducts
+)
+
 //Rutas privadas admin
 
 api.post(
@@ -36,8 +44,16 @@ api.post(
     saveProduct
 )
 
+api.get(
+    '/getByName',
+    [
+        validateJwt
+    ],
+    getOneProduct
+)
+
 api.delete(
-    '/',
+    '/:id',
     [
         validateJwt,
         isAdmin,
@@ -45,13 +61,6 @@ api.delete(
     deleteProduct
 )
 
-api.get(
-    '/:id',
-    [
-        validateJwt
-    ],
-    getOneProduct
-)
 
 api.put(
     '/:id',
@@ -61,6 +70,14 @@ api.put(
         updateProductValidate
     ],
     updateProduct
+)
+
+api.get(
+    '/:id',
+    [
+        validateJwt
+    ],
+    getByCategory
 )
 
 export default api
