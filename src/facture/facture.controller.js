@@ -108,8 +108,7 @@ export const createFacture = async (req, res) => {
 
 export const getMyFactures = async (req, res) => {
     try {
-        const { limit = 3, skip = 3 } = req.query
-        const factures = await Facture.find({user: req.user.uid}).populate(
+        const factures = await Facture.find({ user: req.user.uid, status: 'ACTIVE' }).populate(
             {
                 path: 'items.product', 
                 model: 'Product'
@@ -140,6 +139,60 @@ export const getMyFactures = async (req, res) => {
             }
         )
         
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send(
+            {
+                success: false,
+                message: 'General error when getting facture'
+            }
+        )
+    }
+}
+
+
+export const updateFacture = async (req, res) =>{
+    try {
+        const { id } = req.params
+
+        const facture = await Facture.findById(id)
+
+        if(!facture){
+            return res.status(404).send(
+                {
+                    success: false,
+                    message: 'Facture not found'
+                }
+            )
+        }
+        
+
+        const factureUpdated = await Facture.findByIdAndUpdate(
+            id,
+            {status: 'ANNULED'},
+            { new: true }
+        ).populate(
+            {
+                path: 'items.product', 
+                model: 'Product'
+            }
+        ).populate(
+            {
+                path: 'user',
+                select: 'name email',
+                model: 'User'
+            }
+        )
+
+        return res.status(200).send(
+            {
+                success: true,
+                message: 'Facture annuled',
+                factureUpdated
+            }
+        )
+
+
     } catch (err) {
         console.error(err)
         return res.status(500).send(
