@@ -211,8 +211,16 @@ export const updateFacture = async (req, res) =>{
                 }
             )
         }
-        
 
+        for (let item of facture.items) {
+            const product = await Product.findById(item.product._id)
+            if (product) {
+                product.stock += item.quantity
+                product.purchaseCount -= item.quantity
+                await product.save()
+            }
+        }
+        
         const factureUpdated = await Facture.findByIdAndUpdate(
             id,
             {status: 'ANNULED'},
