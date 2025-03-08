@@ -979,7 +979,7 @@
 							"urlencoded": [
 								{
 									"key": "product",
-									"value": "67c3f4a13aa07515892ce62c",
+									"value": "67c500ec23a82cdd05576657",
 									"type": "text"
 								},
 								{
@@ -1099,6 +1099,32 @@
 					"response": []
 				},
 				{
+					"name": "updateFacture",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3200/v1/Facture/67c5b4ba257d0b39e7cd1dff",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Facture",
+								"67c5b4ba257d0b39e7cd1dff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getMyFactures",
 					"request": {
 						"method": "GET",
@@ -1119,6 +1145,32 @@
 								"v1",
 								"Facture",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFactures",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3200/v1/Facture/getFactures",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"v1",
+								"Facture",
+								"getFactures"
 							]
 						}
 					},
